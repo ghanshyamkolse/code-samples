@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- vue- library development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- interpolation -->
+    <div style="color: blue; background-color: aqua;">
+      {{ message }}
+    </div>
+    <!-- v-bind -->
+    <span v-bind:title="message1">
+      Hover your mouse over me for a few seconds
+      to see my dynamically bound title!
+    </span>
+    <br>
+    <!-- v-if  //flip the seen veriable to false to see magic-->
+    <span v-if="seen">Now you see me //flip the seen veriable to false to see magic</span>
+
+
+    <!-- v-for -->
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+    <!-- v-model -->
+    <p>{{ message3 }}</p>
+    <input v-model="message3">
+    <!-- vue componant -->
+    <ol>
+      <!--
+      Now we provide each todo-item with the todo object
+      it's representing, so that its content can be dynamic.
+      We also need to provide each component with a "key",
+      which will be explained later.
+    -->
+      <span v-for="item in groceryList">
+        <todo-item v-bind:tod="item" v-bind:key="item.id"></todo-item>
+      </span>
+
+    </ol>
+
+  </div>
+  <!-- vue actual component code -->
+  <script>
+
+    Vue.component('todo-item', {
+      // The todo-item component now accepts a
+      // "prop", which is like a custom attribute.
+      // This prop is called todo.
+      props: ['tod'],
+      template: '<li>{{ tod.text }}</li>'
+    }
+    )
+  </script>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello this is my first Vue program !',
+        message1: 'You loaded this page on ' + new Date().toLocaleString(),
+        seen: true,
+        todos: [
+          { text: 'Learn JavaScript' },
+          { text: 'Learn Vue' },
+          { text: 'Build something awesome' }
+        ],
+        message3: 'Hello Vue!',
+        groceryList: [
+          { id: 0, text: 'Vegetables' },
+          { id: 1, text: 'Cheese' },
+          { id: 2, text: 'Whatever else humans are supposed to eat' },
+        ]
+      }
+    })
+
+  </script>
+
+</body>
+
+</html>

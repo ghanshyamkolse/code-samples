@@ -35,6 +35,9 @@
     <!-- v-model -->
     <p>{{ message3 }}</p>
     <input v-model="message3">
+    <!-- v-on -->
+    <p>{{ message3 }}</p>
+    <button v-on:click="reverseMessage">Reverse Message</button>
     <!-- vue componant -->
     <ol>
       <!--
@@ -81,6 +84,11 @@
           { id: 1, text: 'Cheese' },
           { id: 2, text: 'Whatever else humans are supposed to eat' },
         ]
+      },
+      methods: {
+        reverseMessage: function () {
+          this.message3 = this.message3.split('').reverse().join('')
+        }
       }
     })
 
